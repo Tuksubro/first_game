@@ -6,7 +6,6 @@ mene kohtaan x: (0) y: (0)
 sano [Tervetuloa luolastoon!] (2) sekunnin ajan
 lähetä viesti [luo_viholliset v]
 
-// --- PELAAJAN LIIKKUMINEN ---
 ikuisesti
     jos <nappia [nuoli ylös v] painettu?> niin
         muuta y arvolla (5)
@@ -23,14 +22,12 @@ ikuisesti
         aseta suunta (-90) asteeseen
     loppu
     
-    // Hyökkäysmekaniikka välilyönnillä
     jos <nappia [space v] painettu?> niin
         lähetä viesti [hyökkäys v]
         odota (0.3) sekuntia
     loppu
 loppu
 
-// --- VIHOLLISTEN HALLINTA (KLOONAUS) ---
 kun vastaanotan viestin [luo_viholliset v]
 toista (5) kertaa
     luo klooni itsestäni [Vihollinen v]
@@ -44,14 +41,12 @@ ikuisesti
     osoita kohti [Pelaaja v]
     liiku (2) askelta
     
-    // Osuminen pelaajaan
     jos <koskettaako [Pelaaja v]?> niin
         muuta [pelaajan_hp v] arvolla (-10)
         peruuta (20) askelta // Takapotku
         odota (0.5) sekuntia
     loppu
 
-    // Osuminen pelaajan hyökkäykseen
     jos <koskettaako [Miekka v]?> niin
         muuta [vihollisen_hp v] arvolla (-1)
         jos <(vihollisen_hp) < (1)> niin
@@ -61,7 +56,6 @@ ikuisesti
     loppu
 loppu
 
-// --- PELIN PÄÄTTYMINEN ---
 ikuisesti
     jos <(pelaajan_hp) < (1)> niin
         aseta [pelin_tila v] arvoksi [game over]
