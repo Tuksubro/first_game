@@ -1,11 +1,5 @@
 kun vihreää lippua klikataan
 aseta [pelaajan_hp v] arvoksi (100)
-aseta [pisteet v] arvoksi (0)
-aseta [pelin_tila v] arvoksi [käynnissä]
-mene kohtaan x: (0) y: (0)
-sano [Tervetuloa luolastoon!] (2) sekunnin ajan
-lähetä viesti [luo_viholliset v]
-
 ikuisesti
     jos <nappia [nuoli ylös v] painettu?> niin
         muuta y arvolla (5)
@@ -15,51 +9,28 @@ ikuisesti
     loppu
     jos <nappia [nuoli oikealle v] painettu?> niin
         muuta x arvolla (5)
-        aseta suunta (90) asteeseen
     loppu
     jos <nappia [nuoli vasemmalle v] painettu?> niin
         muuta x arvolla (-5)
-        aseta suunta (-90) asteeseen
-    loppu
-    
-    jos <nappia [space v] painettu?> niin
-        lähetä viesti [hyökkäys v]
-        odota (0.3) sekuntia
     loppu
 loppu
 
-kun vastaanotan viestin [luo_viholliset v]
-toista (5) kertaa
-    luo klooni itsestäni [Vihollinen v]
-    odota (1) sekuntia
+kun vihreää lippua klikataan
+ikuisesti
+    luo klooni itsestäni
+    odota (2) sekuntia
 loppu
 
 kun aloitan kloonina
-aseta [vihollisen_hp v] arvoksi (3)
-mene kohtaan x: (satunnainen väliltä (-200) - (200)) y: (satunnainen väliltä (-150) - (150))
+mene kohtaan x: (240) y: (satunnainen väliltä (-180) - (180))
 ikuisesti
-    osoita kohti [Pelaaja v]
-    liiku (2) askelta
-    
+    liiku (-3) askelta
     jos <koskettaako [Pelaaja v]?> niin
-        muuta [pelaajan_hp v] arvolla (-10)
-        peruuta (20) askelta // Takapotku
-        odota (0.5) sekuntia
+        muuta [pelaajan_hp v] arvolla (-1)
+        poista tämä klooni
     loppu
-
-    jos <koskettaako [Miekka v]?> niin
-        muuta [vihollisen_hp v] arvolla (-1)
-        jos <(vihollisen_hp) < (1)> niin
-            muuta [pisteet v] arvolla (10)
-            poista tämä klooni
-        loppu
+    jos <(x-koordinaatti) < (-230)> niin
+        poista tämä klooni
     loppu
 loppu
 
-ikuisesti
-    jos <(pelaajan_hp) < (1)> niin
-        aseta [pelin_tila v] arvoksi [game over]
-        sano [Hävisit pelin!] (3) sekunnin ajan
-        pysäytä [kaikki v]
-    loppu
-loppu
